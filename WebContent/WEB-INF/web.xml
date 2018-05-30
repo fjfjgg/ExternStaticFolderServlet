@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<description>Example of use of ExternStaticFolderServlet</description>
+	<servlet>
+		<description>This is the servlet.</description>
+		<servlet-name>ExternStaticFolder</servlet-name>
+		<servlet-class>es.us.dit.fjfj.servlets.ExternStaticFolderServlet</servlet-class>
+		<init-param>
+			<description>Path to extern folder to serve</description>
+			<param-name>ExternFolder</param-name>
+			<param-value>/tmp</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ExternStaticFolder</servlet-name>
+		<url-pattern>/extern/*</url-pattern>
+	</servlet-mapping>
+</web-app>
