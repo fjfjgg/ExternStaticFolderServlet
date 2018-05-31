@@ -45,9 +45,22 @@ import javax.servlet.http.HttpServletResponse;
 public class ExternStaticFolderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Path to extern folder.
+	 */
 	private String externFolder;
+	
 	private static final int DEFAULT_BUFFER_SIZE = 10240;
+	
+	protected String getExternFolder() {
+		return externFolder;
+	}
 
+	protected void setExternFolder(String externFolder) {
+		this.externFolder = externFolder;
+	}
+
+	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
