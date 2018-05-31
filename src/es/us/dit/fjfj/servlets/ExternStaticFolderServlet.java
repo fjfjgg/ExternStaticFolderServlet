@@ -63,13 +63,13 @@ public class ExternStaticFolderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String externPath = externFolder + request.getPathInfo();
-		File file = new File(externPath);
-		if (!file.isFile()) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-		} else {
+		// Check if user is authorized here or with a filter
+		if (isAuthorized(request, response)) {
 
-			// Check if user is authorized here or with a filter
-			if (isAuthorized(request, response)) {
+			File file = new File(externPath);
+			if (!file.isFile() || !file.canRead()) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			} else {
 
 				// Start
 				response.reset();
@@ -100,11 +100,13 @@ public class ExternStaticFolderServlet extends HttpServlet {
 						output.close();
 				}
 			}
+		} else {
+			response.sendError(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}
 
 	/**
-	 * Check if this path is authorized. Override in subclasess.
+	 * Check if this path is authorized. Override in subclasses.
 	 * 
 	 * @param request
 	 * @param response
